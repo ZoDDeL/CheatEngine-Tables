@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"exp earned in dungeon/instance (update on status screen)"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : SAOFB-Win64-Shipping.exe
+  Version: 
+  Date   : 2018-09-11
+  Author : ZoDDeL
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(pexpaob,SAOFB-Win64-Shipping.exe,8B 83 40 04 00 00 41) // should be unique
+alloc(newmem,$1000,"SAOFB-Win64-Shipping.exe"+5A3913F)
+alloc(pexp,$8)
+
+label(code)
+label(return)
+
+newmem:
+
+
+code:
+  mov eax,[rbx+00000440]
+  mov [pexp],rbx
+  jmp return
+
+pexpaob:
+  jmp newmem
+  nop
+return:
+registersymbol(pexpaob)
+registersymbol(pexp)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+pexpaob:
+  db 8B 83 40 04 00 00
+
+unregistersymbol(pexpaob)
+unregistersymbol(pexp)
+dealloc(newmem)
+dealloc(pexp)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "SAOFB-Win64-Shipping.exe"+5A3913F
+
+"SAOFB-Win64-Shipping.exe"+5A39121: 48 83 EC 20           -  sub rsp,20
+"SAOFB-Win64-Shipping.exe"+5A39125: 48 89 CB              -  mov rbx,rcx
+"SAOFB-Win64-Shipping.exe"+5A39128: E8 33 A4 94 FA        -  call SAOFB-Win64-Shipping.exe+383560
+"SAOFB-Win64-Shipping.exe"+5A3912D: 48 89 C2              -  mov rdx,rax
+"SAOFB-Win64-Shipping.exe"+5A39130: 48 85 C0              -  test rax,rax
+"SAOFB-Win64-Shipping.exe"+5A39133: 75 06                 -  jne SAOFB-Win64-Shipping.exe+5A3913B
+"SAOFB-Win64-Shipping.exe"+5A39135: 48 83 C4 20           -  add rsp,20
+"SAOFB-Win64-Shipping.exe"+5A39139: 5B                    -  pop rbx
+"SAOFB-Win64-Shipping.exe"+5A3913A: C3                    -  ret 
+"SAOFB-Win64-Shipping.exe"+5A3913B: 44 8B 42 2C           -  mov r8d,[rdx+2C]
+// ---------- INJECTING HERE ----------
+"SAOFB-Win64-Shipping.exe"+5A3913F: 8B 83 40 04 00 00     -  mov eax,[rbx+00000440]
+// ---------- DONE INJECTING  ----------
+"SAOFB-Win64-Shipping.exe"+5A39145: 41 01 C0              -  add r8d,eax
+"SAOFB-Win64-Shipping.exe"+5A39148: 8B 8A 40 02 00 00     -  mov ecx,[rdx+00000240]
+"SAOFB-Win64-Shipping.exe"+5A3914E: 41 39 C8              -  cmp r8d,ecx
+"SAOFB-Win64-Shipping.exe"+5A39151: 7E 05                 -  jle SAOFB-Win64-Shipping.exe+5A39158
+"SAOFB-Win64-Shipping.exe"+5A39153: 44 29 C1              -  sub ecx,r8d
+"SAOFB-Win64-Shipping.exe"+5A39156: 01 C8                 -  add eax,ecx
+"SAOFB-Win64-Shipping.exe"+5A39158: 48 83 C4 20           -  add rsp,20
+"SAOFB-Win64-Shipping.exe"+5A3915C: 5B                    -  pop rbx
+"SAOFB-Win64-Shipping.exe"+5A3915D: C3                    -  ret 
+"SAOFB-Win64-Shipping.exe"+5A3915E: CC                    -  int 3 
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"exp"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>pexp</Address>
+          <Offsets>
+            <Offset>440</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"health main"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : SAOFB-Win64-Shipping.exe
+  Version: 
+  Date   : 2018-09-11
+  Author : ZoDDeL
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(health1AOB,SAOFB-Win64-Shipping.exe,F3 0F 10 B7 AC 13 00 00 E8 B7) // should be unique
+alloc(newmem,$1000,"SAOFB-Win64-Shipping.exe"+3181DC)
+alloc(phealth1,$8)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  movss xmm6,[rdi+000013AC]
+  mov [phealth1],rdi
+  jmp return
+
+health1AOB:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+registersymbol(health1AOB)
+registersymbol(phealth1)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+health1AOB:
+  db F3 0F 10 B7 AC 13 00 00
+
+unregistersymbol(health1AOB)
+unregistersymbol(phealth1)
+dealloc(newmem)
+dealloc(phealth1)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "SAOFB-Win64-Shipping.exe"+3181DC
+
+"SAOFB-Win64-Shipping.exe"+3181B7: 48 8B 89 88 00 00 00     -  mov rcx,[rcx+00000088]
+"SAOFB-Win64-Shipping.exe"+3181BE: 48 39 04 D1              -  cmp [rcx+rdx*8],rax
+"SAOFB-Win64-Shipping.exe"+3181C2: 75 7B                    -  jne SAOFB-Win64-Shipping.exe+31823F
+"SAOFB-Win64-Shipping.exe"+3181C4: 48 8B 07                 -  mov rax,[rdi]
+"SAOFB-Win64-Shipping.exe"+3181C7: 48 8B CF                 -  mov rcx,rdi
+"SAOFB-Win64-Shipping.exe"+3181CA: FF 90 A8 08 00 00        -  call qword ptr [rax+000008A8]
+"SAOFB-Win64-Shipping.exe"+3181D0: 84 C0                    -  test al,al
+"SAOFB-Win64-Shipping.exe"+3181D2: 74 6B                    -  je SAOFB-Win64-Shipping.exe+31823F
+"SAOFB-Win64-Shipping.exe"+3181D4: 0F 29 74 24 20           -  movaps [rsp+20],xmm6
+"SAOFB-Win64-Shipping.exe"+3181D9: 48 8B CF                 -  mov rcx,rdi
+// ---------- INJECTING HERE ----------
+"SAOFB-Win64-Shipping.exe"+3181DC: F3 0F 10 B7 AC 13 00 00  -  movss xmm6,[rdi+000013AC]
+// ---------- DONE INJECTING  ----------
+"SAOFB-Win64-Shipping.exe"+3181E4: E8 B7 12 FA FF           -  call SAOFB-Win64-Shipping.exe+2B94A0
+"SAOFB-Win64-Shipping.exe"+3181E9: 0F B6 83 84 05 00 00     -  movzx eax,byte ptr [rbx+00000584]
+"SAOFB-Win64-Shipping.exe"+3181F0: F3 0F 5E F0              -  divss xmm6,xmm0
+"SAOFB-Win64-Shipping.exe"+3181F4: 0F 57 C0                 -  xorps xmm0,xmm0
+"SAOFB-Win64-Shipping.exe"+3181F7: 84 C0                    -  test al,al
+"SAOFB-Win64-Shipping.exe"+3181F9: 75 29                    -  jne SAOFB-Win64-Shipping.exe+318224
+"SAOFB-Win64-Shipping.exe"+3181FB: 0F 2F B3 80 05 00 00     -  comiss xmm6,[rbx+00000580]
+"SAOFB-Win64-Shipping.exe"+318202: 77 1C                    -  ja SAOFB-Win64-Shipping.exe+318220
+"SAOFB-Win64-Shipping.exe"+318204: 0F 2F F0                 -  comiss xmm6,xmm0
+"SAOFB-Win64-Shipping.exe"+318207: 76 17                    -  jna SAOFB-Win64-Shipping.exe+318220
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"health"</Description>
+          <VariableType>Float</VariableType>
+          <Address>phealth1</Address>
+          <Offsets>
+            <Offset>13AC</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"clip main"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : SAOFB-Win64-Shipping.exe
+  Version: 
+  Date   : 2018-09-11
+  Author : ZoDDeL
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(clip1AOB,SAOFB-Win64-Shipping.exe,8B 86 7C 06 00 00 48) // should be unique
+alloc(newmemclip1,$1000,"SAOFB-Win64-Shipping.exe"+324228)
+alloc(pclip1,$8)
+
+label(code)
+label(return)
+
+newmemclip1:
+
+code:
+  mov eax,[rsi+0000067C]
+  mov [pclip1],rsi
+  jmp return
+
+clip1AOB:
+  jmp newmemclip1
+  nop
+return:
+registersymbol(clip1AOB)
+registersymbol(pclip1)
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+clip1AOB:
+  db 8B 86 7C 06 00 00
+
+unregistersymbol(clip1AOB)
+unregistersymbol(pclip1)
+dealloc(newmemclip1)
+dealloc(pclip1)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "SAOFB-Win64-Shipping.exe"+324228
+
+"SAOFB-Win64-Shipping.exe"+3241FE: 74 28                 -  je SAOFB-Win64-Shipping.exe+324228
+"SAOFB-Win64-Shipping.exe"+324200: 44 38 A7 62 08 00 00  -  cmp [rdi+00000862],r12l
+"SAOFB-Win64-Shipping.exe"+324207: 75 10                 -  jne SAOFB-Win64-Shipping.exe+324219
+"SAOFB-Win64-Shipping.exe"+324209: 48 8B CE              -  mov rcx,rsi
+"SAOFB-Win64-Shipping.exe"+32420C: E8 FF 06 02 00        -  call SAOFB-Win64-Shipping.exe+344910
+"SAOFB-Win64-Shipping.exe"+324211: 39 87 44 08 00 00     -  cmp [rdi+00000844],eax
+"SAOFB-Win64-Shipping.exe"+324217: 73 0F                 -  jae SAOFB-Win64-Shipping.exe+324228
+"SAOFB-Win64-Shipping.exe"+324219: 48 8B CF              -  mov rcx,rdi
+"SAOFB-Win64-Shipping.exe"+32421C: E8 1F 95 6D 00        -  call SAOFB-Win64-Shipping.exe+9FD740
+"SAOFB-Win64-Shipping.exe"+324221: 44 88 A7 62 08 00 00  -  mov [rdi+00000862],r12l
+// ---------- INJECTING HERE ----------
+"SAOFB-Win64-Shipping.exe"+324228: 8B 86 7C 06 00 00     -  mov eax,[rsi+0000067C]
+// ---------- DONE INJECTING  ----------
+"SAOFB-Win64-Shipping.exe"+32422E: 48 8B CE              -  mov rcx,rsi
+"SAOFB-Win64-Shipping.exe"+324231: 89 87 40 08 00 00     -  mov [rdi+00000840],eax
+"SAOFB-Win64-Shipping.exe"+324237: E8 D4 06 02 00        -  call SAOFB-Win64-Shipping.exe+344910
+"SAOFB-Win64-Shipping.exe"+32423C: 48 8B 8F F0 07 00 00  -  mov rcx,[rdi+000007F0]
+"SAOFB-Win64-Shipping.exe"+324243: 89 87 44 08 00 00     -  mov [rdi+00000844],eax
+"SAOFB-Win64-Shipping.exe"+324249: 80 BE 89 03 00 00 05  -  cmp byte ptr [rsi+00000389],05
+"SAOFB-Win64-Shipping.exe"+324250: 48 8B 01              -  mov rax,[rcx]
+"SAOFB-Win64-Shipping.exe"+324253: 0F 85 82 00 00 00     -  jne SAOFB-Win64-Shipping.exe+3242DB
+"SAOFB-Win64-Shipping.exe"+324259: B2 01                 -  mov dl,01
+"SAOFB-Win64-Shipping.exe"+32425B: FF 90 40 02 00 00     -  call qword ptr [rax+00000240]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>21</ID>
+          <Description>"clip"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>pclip1</Address>
+          <Offsets>
+            <Offset>67C</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Code :mov eax,[rbx+00000440] (read exp)</Description>
+      <Address>145A3913F</Address>
+      <ModuleName>SAOFB-Win64-Shipping.exe</ModuleName>
+      <ModuleNameOffset>5A3913F</ModuleNameOffset>
+      <Before>
+        <Byte>C3</Byte>
+        <Byte>44</Byte>
+        <Byte>8B</Byte>
+        <Byte>42</Byte>
+        <Byte>2C</Byte>
+      </Before>
+      <Actual>
+        <Byte>8B</Byte>
+        <Byte>83</Byte>
+        <Byte>40</Byte>
+        <Byte>04</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>41</Byte>
+        <Byte>01</Byte>
+        <Byte>C0</Byte>
+        <Byte>8B</Byte>
+        <Byte>8A</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Code :movss xmm6,[rdi+000013AC] (health main)</Description>
+      <Address>1403181DC</Address>
+      <ModuleName>SAOFB-Win64-Shipping.exe</ModuleName>
+      <ModuleNameOffset>3181DC</ModuleNameOffset>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>20</Byte>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CF</Byte>
+      </Before>
+      <Actual>
+        <Byte>F3</Byte>
+        <Byte>0F</Byte>
+        <Byte>10</Byte>
+        <Byte>B7</Byte>
+        <Byte>AC</Byte>
+        <Byte>13</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>E8</Byte>
+        <Byte>B7</Byte>
+        <Byte>12</Byte>
+        <Byte>FA</Byte>
+        <Byte>FF</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Code :mov eax,[rsi+0000067C] (clip main)</Description>
+      <Address>140324228</Address>
+      <ModuleName>SAOFB-Win64-Shipping.exe</ModuleName>
+      <ModuleNameOffset>324228</ModuleNameOffset>
+      <Before>
+        <Byte>A7</Byte>
+        <Byte>62</Byte>
+        <Byte>08</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>CC</Byte>
+        <Byte>86</Byte>
+        <Byte>7C</Byte>
+        <Byte>06</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CE</Byte>
+        <Byte>89</Byte>
+        <Byte>87</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>
