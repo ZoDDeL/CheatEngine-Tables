@@ -1232,6 +1232,30 @@ GhostOfTsushima.exe+691489: 48 8D 4C 24 30           - lea rcx,[rsp+30]
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
+                  <ID>974</ID>
+                  <Description>"killing staggered enemy restores % health"</Description>
+                  <DropDownList DisplayValueAsItem="1">0.200000003:Gosaku Armor Fully
+</DropDownList>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>pPlayer</Address>
+                  <Offsets>
+                    <Offset>4660</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>972</ID>
+                  <Description>"staggering enemy prevents interrupt x seconds"</Description>
+                  <DropDownList DisplayValueAsItem="1">6:Shinatsuhiko
+</DropDownList>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>pPlayer</Address>
+                  <Offsets>
+                    <Offset>4664</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
                   <ID>193</ID>
                   <Description>"timeframe parry? bonus (mizo-no-kami)"</Description>
                   <DropDownList DisplayValueAsItem="1">0.1666699946:mizo-no-kami
@@ -1486,6 +1510,16 @@ GhostOfTsushima.exe+691489: 48 8D 4C 24 30           - lea rcx,[rsp+30]
                   <Address>pPlayer</Address>
                   <Offsets>
                     <Offset>4434</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>969</ID>
+                  <Description>"kunai thrown amount"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>pPlayer</Address>
+                  <Offsets>
+                    <Offset>454C</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
