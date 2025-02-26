@@ -860,6 +860,20 @@ GhostOfTsushima.exe+5ACA25: F3 41 0F 5E F0              - divss xmm6,xmm8
               <VariableType>4 Bytes</VariableType>
               <Address>+C</Address>
             </CheatEntry>
+            <CheatEntry>
+              <ID>976</ID>
+              <Description>"blow darts"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+2C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>978</ID>
+              <Description>"hallucination darts"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+24</Address>
+            </CheatEntry>
           </CheatEntries>
         </CheatEntry>
       </CheatEntries>
