@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"savecount 0"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : re0hd.exe
+  Version: 
+  Date   : 2024-02-18
+  Author : ZoDDeL
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(savecount,re0hd.exe,FF 00 8B 0D) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [eax],#0
+  jmp return
+
+savecount:
+  jmp1 newmem
+  nop
+return:
+registersymbol(savecount)
+
+[DISABLE]
+
+savecount:
+  db FF 00
+
+unregistersymbol(savecount)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re0hd.exe+20B731
+
+re0hd.exe+20B707: 8B 0D 9C DE DC 00  - mov ecx,[re0hd.exe+9CDE9C]
+re0hd.exe+20B70D: 85 C9              - test ecx,ecx
+re0hd.exe+20B70F: 75 1B              - jne re0hd.exe+20B72C
+re0hd.exe+20B711: 68 18 4F CB 00     - push re0hd.exe+8B4F18
+re0hd.exe+20B716: 68 8B 01 00 00     - push 0000018B
+re0hd.exe+20B71B: 68 30 4F CB 00     - push re0hd.exe+8B4F30
+re0hd.exe+20B720: E8 7B 68 DF FF     - call re0hd.exe+1FA0
+re0hd.exe+20B725: 8B 4C 24 10        - mov ecx,[esp+10]
+re0hd.exe+20B729: 83 C4 0C           - add esp,0C
+re0hd.exe+20B72C: E8 DF 18 F9 FF     - call re0hd.exe+19D010
+// ---------- INJECTING HERE ----------
+re0hd.exe+20B731: FF 00              - inc [eax]
+// ---------- DONE INJECTING  ----------
+re0hd.exe+20B733: 8B 0D 14 F4 E2 00  - mov ecx,[re0hd.exe+A2F414]
+re0hd.exe+20B739: 6A 01              - push 01
+re0hd.exe+20B73B: 6A 07              - push 07
+re0hd.exe+20B73D: E8 4E 9C 04 00     - call re0hd.exe+255390
+re0hd.exe+20B742: 8B 0D 14 F4 E2 00  - mov ecx,[re0hd.exe+A2F414]
+re0hd.exe+20B748: 6A 01              - push 01
+re0hd.exe+20B74A: 6A 08              - push 08
+re0hd.exe+20B74C: E8 3F 9C 04 00     - call re0hd.exe+255390
+re0hd.exe+20B751: 6A 10              - push 10
+re0hd.exe+20B753: 68 00 04 00 00     - push 00000400
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"no reload (inf clip)"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : re0hd.exe
+  Version: 
+  Date   : 2024-02-18
+  Author : ZoDDeL
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(noReload,re0hd.exe,89 70 04 0F B7 C3) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  cmp esi,[eax+04]
+  jge code
+  movzx eax,bx
+  jmp return
+
+code:
+  mov [eax+04],esi
+  movzx eax,bx
+  jmp return
+
+noReload:
+  jmp newmem
+  nop
+return:
+registersymbol(noReload)
+
+[DISABLE]
+
+noReload:
+  db 89 70 04 0F B7 C3
+
+unregistersymbol(noReload)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re0hd.exe+DB981
+
+re0hd.exe+DB965: 75 65           - jne re0hd.exe+DB9CC
+re0hd.exe+DB967: 8B 4C 24 2C     - mov ecx,[esp+2C]
+re0hd.exe+DB96B: 8B C3           - mov eax,ebx
+re0hd.exe+DB96D: 3B C1           - cmp eax,ecx
+re0hd.exe+DB96F: 72 1F           - jb re0hd.exe+DB990
+re0hd.exe+DB971: FF 77 3C        - push [edi+3C]
+re0hd.exe+DB974: 2B D9           - sub ebx,ecx
+re0hd.exe+DB976: 8D 4F 04        - lea ecx,[edi+04]
+re0hd.exe+DB979: 0F B7 F3        - movzx esi,bx
+re0hd.exe+DB97C: E8 CF EE FF FF  - call re0hd.exe+DA850
+// ---------- INJECTING HERE ----------
+re0hd.exe+DB981: 89 70 04        - mov [eax+04],esi
+// ---------- DONE INJECTING  ----------
+re0hd.exe+DB984: 0F B7 C3        - movzx eax,bx
+re0hd.exe+DB987: 5B              - pop ebx
+re0hd.exe+DB988: 5F              - pop edi
+re0hd.exe+DB989: 5E              - pop esi
+re0hd.exe+DB98A: 83 C4 18        - add esp,18
+re0hd.exe+DB98D: C2 08 00        - ret 0008
+re0hd.exe+DB990: 33 DB           - xor ebx,ebx
+re0hd.exe+DB992: 0F B7 C3        - movzx eax,bx
+re0hd.exe+DB995: 5B              - pop ebx
+re0hd.exe+DB996: 5F              - pop edi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>12</ID>
+      <Description>"godmode (updates on load save or dmg calc)"</Description>
+      <Options moHideChildren="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : re0hd.exe
+  Version: 
+  Date   : 2024-02-20
+  Author : ZoDDeL
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(godmode,re0hd.exe,89 81 30 10 00 00 C2) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+  // +0 (ecx) mov +174 string "uPlayerRebecca"
+  // +FE8 4byte 3 / 0
+  // +100C   #256 / 257 // 1 for enemies?
+  //cmp dword ptr [ecx+0000100C],#256 // 1 for enemies?
+
+  // mov eax to cmp position
+  mov eax,[ecx]
+  //mov eax,[eax+174]
+
+  // cmp string
+  cmp dword ptr [eax+174],'uPla'
+  jne default
+  cmp word ptr [eax+178],'ye'
+  jne default
+  mov [_read],eax
+  mov [_readB],ecx
+  //cmp dword ptr [eax+04],'yerR'
+  //jne code
+  //cmp dword ptr [eax+08],'ebec'
+  //jne code
+
+  // bring back default eax
+  mov eax,[esp+04]
+
+
+  // cmp future health eax with current health [ecx+00001030]
+  cmp eax,[ecx+00001030]
+  jl return
+  jmp code
+
+default:
+  // bring back default eax
+  mov eax,[esp+04]
+  cmp eax,[ecx+00001030]
+  jl ohko
+  jmp code
+
+ohko:
+  cmp [_toggle],#1
+  jne code
+  cmp eax,#0
+  jle code
+  cmp eax,#5000
+  jg code
+  cmp [ecx+00001030],#0
+  jle code
+  cmp [ecx+00001030],#5000
+  jg code
+  mov [ecx+00001030],FFFFFFFF // -1
+  jmp return
+
+
+
+code:
+  mov [ecx+00001030],eax
+  jmp return
+
+_read:
+ dd #0
+
+_readB:
+ dd #0
+
+_toggle:
+ dd #0
+
+godmode:
+  jmp newmem
+  nop
+return:
+registersymbol(godmode)
+registersymbol(_read)
+registersymbol(_readB)
+registersymbol(_toggle)
+
+[DISABLE]
+
+godmode:
+  db 89 81 30 10 00 00
+
+unregistersymbol(godmode)
+unregistersymbol(_read)
+unregistersymbol(_readB)
+unregistersymbol(_toggle)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re0hd.exe+129254
+
+re0hd.exe+12923D: CC                 - int 3 
+re0hd.exe+12923E: CC                 - int 3 
+re0hd.exe+12923F: CC                 - int 3 
+re0hd.exe+129240: 8B 44 24 04        - mov eax,[esp+04]
+re0hd.exe+129244: 89 81 EC 0F 00 00  - mov [ecx+00000FEC],eax
+re0hd.exe+12924A: C2 04 00           - ret 0004
+re0hd.exe+12924D: CC                 - int 3 
+re0hd.exe+12924E: CC                 - int 3 
+re0hd.exe+12924F: CC                 - int 3 
+re0hd.exe+129250: 8B 44 24 04        - mov eax,[esp+04]
+// ---------- INJECTING HERE ----------
+re0hd.exe+129254: 89 81 30 10 00 00  - mov [ecx+00001030],eax
+// ---------- DONE INJECTING  ----------
+re0hd.exe+12925A: C2 04 00           - ret 0004
+re0hd.exe+12925D: CC                 - int 3 
+re0hd.exe+12925E: CC                 - int 3 
+re0hd.exe+12925F: CC                 - int 3 
+re0hd.exe+129260: 56                 - push esi
+re0hd.exe+129261: 8B F1              - mov esi,ecx
+re0hd.exe+129263: 57                 - push edi
+re0hd.exe+129264: 8B 06              - mov eax,[esi]
+re0hd.exe+129266: 8B 7C 24 0C        - mov edi,[esp+0C]
+re0hd.exe+12926A: 3B C7              - cmp eax,edi
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>25</ID>
+          <Description>"one hit kill"</Description>
+          <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:OFF
+1:ON
+</DropDownList>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>_toggle</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>39</ID>
+          <Description>""</Description>
+          <Options moHideChildren="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>15</ID>
+              <Description>"No description"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>14</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>CCFF64</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>19</ID>
+                  <Description>"No description"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>-174</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>23</ID>
+              <Description>"No description"</Description>
+              <VariableType>String</VariableType>
+              <Length>12</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>re0hd.exe+8CF7F4</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>24</ID>
+                  <Description>"No description"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>-174</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>13</ID>
+              <Description>"read"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>_read</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>14</ID>
+                  <Description>"string"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>String</VariableType>
+                  <Length>14</Length>
+                  <Unicode>0</Unicode>
+                  <CodePage>0</CodePage>
+                  <ZeroTerminate>1</ZeroTerminate>
+                  <Address>+174</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>20</ID>
+              <Description>"readB"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>_readB</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>17</ID>
+                  <Description>"health"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+1030</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>27</ID>
+          <Description>"godmode2 (poison)"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : re0hd.exe
+  Version: 
+  Date   : 2024-03-09
+  Author : ZoDDeL
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(godmode2,re0hd.exe,89 81 30 10 00 00 5E) // should be unique
+alloc(newmem2,$1000)
+
+label(code2)
+label(return2)
+
+newmem2:
+  mov eax,[ecx]
+  //mov eax,[eax+174]
+
+  // cmp string
+  cmp dword ptr [eax+174],'uPla'
+  jne default2
+  cmp word ptr [eax+178],'ye'
+  jne default2
+
+
+  // bring back default eax
+  mov eax,[ecx+00001030]
+  xor esi,edx
+  sub esi,edx
+  sub eax,esi
+
+  // cmp future health eax with current health [ecx+00001030]
+  cmp eax,[ecx+00001030]
+  jl return2
+  jmp code2
+
+default2:
+  // bring back default eax
+  mov eax,[ecx+00001030]
+  xor esi,edx
+  sub esi,edx
+  sub eax,esi
+  jmp code2
+
+code2:
+  mov [ecx+00001030],eax
+  jmp return2
+
+godmode2:
+  jmp newmem2
+  nop
+return2:
+registersymbol(godmode2)
+
+[DISABLE]
+
+godmode2:
+  db 89 81 30 10 00 00 5E
+
+unregistersymbol(godmode2)
+dealloc(newmem2)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re0hd.exe+1267D4
+
+re0hd.exe+1267BE: CC                 - int 3 
+re0hd.exe+1267BF: CC                 - int 3 
+re0hd.exe+1267C0: 8B 44 24 04        - mov eax,[esp+04]
+re0hd.exe+1267C4: 99                 - cdq 
+re0hd.exe+1267C5: 56                 - push esi
+re0hd.exe+1267C6: 8B F0              - mov esi,eax
+re0hd.exe+1267C8: 8B 81 30 10 00 00  - mov eax,[ecx+00001030]
+re0hd.exe+1267CE: 33 F2              - xor esi,edx
+re0hd.exe+1267D0: 2B F2              - sub esi,edx
+re0hd.exe+1267D2: 2B C6              - sub eax,esi
+// ---------- INJECTING HERE ----------
+re0hd.exe+1267D4: 89 81 30 10 00 00  - mov [ecx+00001030],eax
+// ---------- DONE INJECTING  ----------
+re0hd.exe+1267DA: 5E                 - pop esi
+re0hd.exe+1267DB: C2 04 00           - ret 0004
+re0hd.exe+1267DE: CC                 - int 3 
+re0hd.exe+1267DF: CC                 - int 3 
+re0hd.exe+1267E0: 55                 - push ebp
+re0hd.exe+1267E1: 8B EC              - mov ebp,esp
+re0hd.exe+1267E3: 83 E4 F0           - and esp,-10
+re0hd.exe+1267E6: 81 EC 94 00 00 00  - sub esp,00000094
+re0hd.exe+1267EC: 53                 - push ebx
+re0hd.exe+1267ED: 56                 - push esi
+}
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>38</ID>
+      <Description>"item editor"</Description>
+      <Options moHideChildren="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : re0hd.exe
+  Version: 
+  Date   : 2025-01-02
+  Author : ZoDDeL
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(itemEditor,re0hd.exe,4A F2 FF 83 C4 0C 8B 44 F7 04) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+  cmp edi,#0
+  je code
+
+  push ebx
+  lea ebx,[edi+esi*8+04] // edi = startaddress / esi = slot iD
+  mov [highlightedSlot],ebx
+  pop ebx
+  jmp code
+
+
+code:
+  mov eax,[edi+esi*8+04]
+  jmp return
+
+highlightedSlot:
+  dd #0
+
+itemEditor+06:
+  jmp1 newmem
+  nop 3
+return:
+registersymbol(itemEditor)
+registersymbol(highlightedSlot)
+
+[DISABLE]
+
+itemEditor+06:
+  db 8B 44 F7 04
+
+unregistersymbol(itemEditor)
+unregistersymbol(highlightedSlot)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re0hd.exe+DD511
+
+re0hd.exe+DD4F1: 8B 74 24 08     - mov esi,[esp+08]
+re0hd.exe+DD4F5: 57              - push edi
+re0hd.exe+DD4F6: 8B F9           - mov edi,ecx
+re0hd.exe+DD4F8: 83 FE 06        - cmp esi,06
+re0hd.exe+DD4FB: 72 14           - jb re0hd.exe+DD511
+re0hd.exe+DD4FD: 68 A4 57 CB 00  - push re0hd.exe+8B57A4
+re0hd.exe+DD502: 6A 32           - push 32
+re0hd.exe+DD504: 68 C8 57 CB 00  - push re0hd.exe+8B57C8
+re0hd.exe+DD509: E8 92 4A F2 FF  - call re0hd.exe+1FA0
+re0hd.exe+DD50E: 83 C4 0C        - add esp,0C
+// ---------- INJECTING HERE ----------
+re0hd.exe+DD511: 8B 44 F7 04     - mov eax,[edi+esi*8+04]
+// ---------- DONE INJECTING  ----------
+re0hd.exe+DD515: 5F              - pop edi
+re0hd.exe+DD516: 5E              - pop esi
+re0hd.exe+DD517: C2 04 00        - ret 0004
+re0hd.exe+DD51A: CC              - int 3 
+re0hd.exe+DD51B: CC              - int 3 
+re0hd.exe+DD51C: CC              - int 3 
+re0hd.exe+DD51D: CC              - int 3 
+re0hd.exe+DD51E: CC              - int 3 
+re0hd.exe+DD51F: CC              - int 3 
+re0hd.exe+DD520: 56              - push esi
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>37</ID>
+          <Description>"ITEMID"</Description>
+          <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">2:Knife
+3:Handgun (Billy's Gun)
+4:Handgun (Samurai Edge)
+5:Hunting Gun (2 Barrel Shotgun)
+6:Shotgun (Pump-Action Shotgun)
+7:Grenade Launcher (Explosive)
+8:Grenade Launcher (Napalm)
+9:Grenade Launcher (Acid)
+10:Magnum Pistol
+11:Sub-Machinegun (MP5K)
+14:Molotov Cocktail
+17:Custom Handgun (Billy's Gun)
+19:Custom Handgun (Samurai Edge)
+22:Magnum Revolver
+23:Rocket Launcher
+26:Handgun Parts (Upgrade Hundgun)
+32:Handgun Ammo (9mm Parabellum)
+33:Shotgun Ammo (12 Gauge)
+34:Magnum Ammo
+35:Grenade Launcher Ammo (Explosive)
+36:Grenade Launcher Ammo (Acid)
+37:Grenade Launcher Ammo (Napalm)
+38:Empty Bottle (Molotov)
+39:Gas Tank (Molotov)
+40:Machinegun Ammo (SMG)
+43:Green Herb
+44:Blue Herb
+45:Red Herb
+46:Herb Mix (Green x2)
+47:Herb Mix (Green x3)
+48:Herb Mix (Green / Red)
+49:Herb Mix (Green / Blue)
+50:Herb Mix (Green x2 / Blue)
+51:Herb Mix (Green / Red / Blue)
+53:First-Aid Spray
+55:Ink Ribbon
+57:Gold Ring
+58:Silver Ring
+59:Briefcase (no Rings)
+60:Briefcase (Gold Ring)
+61:Briefcase (Silver Ring)
+62:Briefcase (Gold + Silver Ring)
+63:Lighter Fluid
+65:Train Key (Conductor Room)
+66:Breeding Rm. Key
+67:Elevator Key
+68:Facility Key (Fire Emblem)
+70:Facility Key (Water Emblem)
+71:Bl. Leech Charm
+72:Gr. Leech Charm
+73:Factory Key
+75:Blue Keycard
+76:Keycard (Incinerator)
+77:Magnetic Card (brake system)
+78:Locker Key
+79:Unity Tablet
+80:Obedience Tablet
+83:Vise Handle
+94:Battery
+104:Hookshot
+107:Conductors Key (Train Key)
+108:Fire Key (Facility Key)
+110:Water Key (Facility Key)
+111:Up Key (Factory Key)
+</DropDownList>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"selected itemslot"</Description>
+          <DropDownListLink>ITEMID</DropDownListLink>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>highlightedSlot</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>36</ID>
+              <Description>"amount"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+4</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <LuaScript>if not syntaxcheck then
+
+  getAutoAttachList().add("re0hd.exe")
+
+
+
+  function cycleFullCompact( sender, force )
+    local state = not( compactmenuitem.Caption == 'Compact View Mode' )
+    if force ~= nil then
+      state = not force
+    end
+    compactmenuitem.Caption = state and 'Compact View Mode' or 'Full View Mode'
+    getMainForm().Splitter1.Visible = state
+    getMainForm().Panel4.Visible = state
+    getMainForm().Panel5.Visible = state
+  end
+
+  function addCompactMenu()
+    if compactmenualreadyexists then return end
+      local parent = getMainForm().Menu.Items
+      compactmenuitem = createMenuItem( parent )
+      parent.add( compactmenuitem )
+      compactmenuitem.Caption = 'Compact View Mode'
+      compactmenuitem.OnClick = cycleFullCompact
+      compactmenualreadyexists = 'yes'
+  end
+
+  addCompactMenu()
+  cycleFullCompact( nil, true )
+
+
+  	function pushYoutube( sender, force )
+		local state = not( youtubemenuitem.Caption == 'my Youtube' )
+		if force ~= nil then
+		   state = not force
+		end
+		youtubemenuitem.Caption = state and 'my Youtube' or 'my Youtube'
+		if force == nil then
+		shellExecute('https://www.youtube.com/@ZoDDeL')
+		end
+	end
+
+	function addYoutubeButton()
+		if donomenualreadyexists then return end
+		local parent = getMainForm().Menu.Items
+		youtubemenuitem = createMenuItem( parent )
+		parent.add( youtubemenuitem )
+		youtubemenuitem.Caption = 'my Youtube'
+		youtubemenuitem.OnClick = pushYoutube
+		youtubemenualreadyexists = 'yes'
+	end
+
+	addYoutubeButton()
+	pushYoutube( nil, true )
+
+
+	function pushDono( sender, force )
+		local state = not( donomenuitem.Caption == 'Thx for your Donation :)' )
+		if force ~= nil then
+		   state = not force
+		end
+		donomenuitem.Caption = state and 'Thx for your Donation :)' or 'Paypal Donation'
+		if force == nil then
+		shellExecute('https://paypal.me/zoddel')
+		end
+	end
+
+	function addDonoButton()
+		if donomenualreadyexists then return end
+		local parent = getMainForm().Menu.Items
+		donomenuitem = createMenuItem( parent )
+		parent.add( donomenuitem )
+		donomenuitem.Caption = 'Thx for your Donation :)'
+		donomenuitem.OnClick = pushDono
+		donomenualreadyexists = 'yes'
+	end
+
+	addDonoButton()
+	pushDono( nil, true )
+
+
+	function pushGitHub( sender, force )
+		local state = not( githubmenuitem.Caption == 'GitHub' )
+		if force ~= nil then
+		   state = not force
+		end
+		githubmenuitem.Caption = state and 'GitHub' or 'GitHub'
+		if force == nil then
+		shellExecute('https://github.com/ZoDDeL/CheatEngine-Tables')
+		end
+	end
+
+	function addGitHubButton()
+		if githubmenualreadyexists then return end
+		local parent = getMainForm().Menu.Items
+		githubmenuitem = createMenuItem( parent )
+		parent.add( githubmenuitem )
+		githubmenuitem.Caption = 'GitHub'
+		githubmenuitem.OnClick = pushGitHub
+		githubmenualreadyexists = 'yes'
+	end
+
+	addGitHubButton()
+	pushGitHub( nil, true )
+
+
+end
+
+
+</LuaScript>
+</CheatTable>
