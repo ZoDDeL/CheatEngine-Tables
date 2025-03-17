@@ -2,6 +2,11 @@
 <CheatTable CheatEngineTableVersion="45">
   <CheatEntries>
     <CheatEntry>
+      <ID>40</ID>
+      <Description>"version: 17 March 2025 (Build 17178773)"</Description>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
       <ID>7</ID>
       <Description>"savecount 0"</Description>
       <VariableType>Auto Assembler Script</VariableType>
@@ -498,7 +503,7 @@ re0hd.exe+1267ED: 56                 - push esi
 
 [ENABLE]
 
-aobscanmodule(itemEditor,re0hd.exe,4A F2 FF 83 C4 0C 8B 44 F7 04) // should be unique
+aobscanmodule(itemEditor,re0hd.exe,48 F2 FF 83 C4 0C 8B 44 F7 04 5F) // should be unique
 alloc(newmem,$1000)
 
 label(code)
@@ -533,7 +538,7 @@ registersymbol(highlightedSlot)
 [DISABLE]
 
 itemEditor+06:
-  db 8B 44 F7 04
+  db 8B 44 F7 04 5F
 
 unregistersymbol(itemEditor)
 unregistersymbol(highlightedSlot)
@@ -571,7 +576,7 @@ re0hd.exe+DD520: 56              - push esi
         <CheatEntry>
           <ID>37</ID>
           <Description>"ITEMID"</Description>
-          <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">2:Knife
+          <DropDownList DisplayValueAsItem="1">2:Knife
 3:Handgun (Billy's Gun)
 4:Handgun (Samurai Edge)
 5:Hunting Gun (2 Barrel Shotgun)
@@ -635,6 +640,25 @@ re0hd.exe+DD520: 56              - push esi
 108:Fire Key (Facility Key)
 110:Water Key (Facility Key)
 111:Up Key (Factory Key)
+113:Dining Car Key
+117:Leech Capsule
+118:Dial
+119:Duralumin Case (385)
+120:Statue of Evil
+121:Statue of Good
+122:Jewelry Box (silver ring)
+123:Mixing Set (herbs)
+124:MO Disk (security system 1.02)
+125:Ice Pick
+126:Iron Needle (clock?)
+127:Shaft Key (R)
+128:Industrial Water (Distilled)
+129:Empty Battery (Hi-Power)
+130:Angel Wings (Statue of Good)
+131:Black Wing (Statue of Evil)
+132:White Statue (Statue of Good)
+133:Black Statue (Statue of Evil)
+134:Red Chemical
 </DropDownList>
           <GroupHeader>1</GroupHeader>
         </CheatEntry>
