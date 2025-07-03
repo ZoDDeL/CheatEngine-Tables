@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="46">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"Gori: Cuddly Carnage v1.0.187"</Description>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>32</ID>
+      <Description>"inf fuel"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : GoriCuddlyCarnage-Win64-Shipping.exe
+  Version: 
+  Date   : 2025-07-02
+  Author : ZoDDeL
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(infPower,GoriCuddlyCarnage-Win64-Shipping.exe,F3 0F 11 81 74 05 00 00 E8 86) // should be unique
+alloc(newmem,$1000,infPower)
+
+aobscanmodule(infPower2,GoriCuddlyCarnage-Win64-Shipping.exe,F3 0F 11 81 74 05 00 00 E8 CA) // should be unique
+alloc(newmem2,$1000,infPower2)
+
+label(code)
+label(return)
+
+label(code2)
+label(return2)
+
+newmem:
+  movss xmm0,[rcx+00000578]
+
+code:
+  movss [rcx+00000574],xmm0
+  jmp return
+
+infPower:
+  jmp newmem
+  nop 3
+return:
+
+
+newmem2:
+  movss xmm0,[rcx+00000578]
+
+code2:
+  movss [rcx+00000574],xmm0
+  jmp return2
+
+infPower2:
+  jmp newmem2
+  nop 3
+return2:
+
+registersymbol(infPower)
+registersymbol(infPower2)
+
+[DISABLE]
+
+infPower:
+  db F3 0F 11 81 74 05 00 00
+
+infPower2:
+  db F3 0F 11 81 74 05 00 00
+
+unregistersymbol(infPower)
+unregistersymbol(infPower2)
+dealloc(newmem)
+dealloc(newmem2)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E6D
+
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E4E: CC                       - int 3 
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E4F: CC                       - int 3 
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E50: 40 53                    - push rbx
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E52: 48 83 EC 20              - sub rsp,20
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E56: 0F 57 C0                 - xorps xmm0,xmm0
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E59: 48 8B D9                 - mov rbx,rcx
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E5C: 0F 2F C8                 - comiss xmm1,xmm0
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E5F: 72 0C                    - jb "GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E6D
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E61: F3 0F 10 81 78 05 00 00  - movss xmm0,[rcx+00000578]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E69: F3 0F 5D C1              - minss xmm0,xmm1
+// ---------- INJECTING HERE ----------
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E6D: F3 0F 11 81 74 05 00 00  - movss [rcx+00000574],xmm0
+// ---------- DONE INJECTING  ----------
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E75: E8 86 95 01 00           - call "GoriCuddlyCarnage-Win64-Shipping.exe"+1A62400
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E7A: 48 85 C0                 - test rax,rax
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E7D: 74 1D                    - je "GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E9C
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E7F: F3 0F 10 93 78 05 00 00  - movss xmm2,[rbx+00000578]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E87: 48 8B C8                 - mov rcx,rax
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E8A: F3 0F 10 8B 74 05 00 00  - movss xmm1,[rbx+00000574]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E92: 48 83 C4 20              - add rsp,20
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E96: 5B                       - pop rbx
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E97: E9 24 27 F6 FF           - jmp "GoriCuddlyCarnage-Win64-Shipping.exe"+19AB5C0
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A48E9C: 48 83 C4 20              - add rsp,20
+}
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: "GoriCuddlyCarnage-Win64-Shipping.exe"+1A46029
+
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46000: 40 53                    - push rbx
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46002: 48 83 EC 20              - sub rsp,20
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46006: F3 0F 10 91 74 05 00 00  - movss xmm2,[rcx+00000574]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4600E: 0F 57 C0                 - xorps xmm0,xmm0
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46011: F3 0F 5C D1              - subss xmm2,xmm1
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46015: 48 8B D9                 - mov rbx,rcx
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46018: 0F 2F D0                 - comiss xmm2,xmm0
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4601B: 72 0C                    - jb "GoriCuddlyCarnage-Win64-Shipping.exe"+1A46029
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4601D: F3 0F 10 81 78 05 00 00  - movss xmm0,[rcx+00000578]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46025: F3 0F 5D C2              - minss xmm0,xmm2
+// ---------- INJECTING HERE ----------
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46029: F3 0F 11 81 74 05 00 00  - movss [rcx+00000574],xmm0
+// ---------- DONE INJECTING  ----------
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46031: E8 CA C3 01 00           - call "GoriCuddlyCarnage-Win64-Shipping.exe"+1A62400
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46036: 48 85 C0                 - test rax,rax
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46039: 74 1D                    - je "GoriCuddlyCarnage-Win64-Shipping.exe"+1A46058
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4603B: F3 0F 10 93 78 05 00 00  - movss xmm2,[rbx+00000578]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46043: 48 8B C8                 - mov rcx,rax
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46046: F3 0F 10 8B 74 05 00 00  - movss xmm1,[rbx+00000574]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4604E: 48 83 C4 20              - add rsp,20
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46052: 5B                       - pop rbx
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46053: E9 68 55 F6 FF           - jmp "GoriCuddlyCarnage-Win64-Shipping.exe"+19AB5C0
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A46058: 48 83 C4 20              - add rsp,20
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>31</ID>
+      <Description>"inf rockets"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : GoriCuddlyCarnage-Win64-Shipping.exe
+  Version: 
+  Date   : 2025-07-03
+  Author : ZoDDeL
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(infRocket,GoriCuddlyCarnage-Win64-Shipping.exe,83 B9 74 0F 00 00 00) // should be unique
+alloc(newmem,$1000,infRocket)
+
+label(code)
+label(return)
+
+newmem:
+  mov [rcx+00000F74],#9
+
+code:
+  cmp dword ptr [rcx+00000F74],00
+  jmp return
+
+infRocket:
+  jmp newmem
+  nop 2
+return:
+registersymbol(infRocket)
+
+[DISABLE]
+
+infRocket:
+  db 83 B9 74 0F 00 00 00
+
+unregistersymbol(infRocket)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "GoriCuddlyCarnage-Win64-Shipping.exe"+1A388CB
+
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388A6: 74 04                 - je "GoriCuddlyCarnage-Win64-Shipping.exe"+1A388AC
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388A8: B0 01                 - mov al,01
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388AA: EB 02                 - jmp "GoriCuddlyCarnage-Win64-Shipping.exe"+1A388AE
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388AC: 32 C0                 - xor al,al
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388AE: 80 B9 7C 0F 00 00 00  - cmp byte ptr [rcx+00000F7C],00
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388B5: 0F 84 AF 01 00 00     - je "GoriCuddlyCarnage-Win64-Shipping.exe"+1A38A6A
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388BB: 84 C0                 - test al,al
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388BD: 75 0C                 - jne "GoriCuddlyCarnage-Win64-Shipping.exe"+1A388CB
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388BF: 38 81 91 0F 00 00     - cmp [rcx+00000F91],al
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388C5: 0F 84 9F 01 00 00     - je "GoriCuddlyCarnage-Win64-Shipping.exe"+1A38A6A
+// ---------- INJECTING HERE ----------
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388CB: 83 B9 74 0F 00 00 00  - cmp dword ptr [rcx+00000F74],00
+// ---------- DONE INJECTING  ----------
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388D2: 0F 8E 92 01 00 00     - jng "GoriCuddlyCarnage-Win64-Shipping.exe"+1A38A6A
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388D8: 48 89 5C 24 58        - mov [rsp+58],rbx
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388DD: 48 89 6C 24 60        - mov [rsp+60],rbp
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388E2: 4C 89 74 24 30        - mov [rsp+30],r14
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388E7: 45 33 F6              - xor r14d,r14d
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388EA: 4C 89 74 24 20        - mov [rsp+20],r14
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388EF: 4C 89 74 24 28        - mov [rsp+28],r14
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388F4: E8 47 D1 F4 FF        - call "GoriCuddlyCarnage-Win64-Shipping.exe"+1985A40
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388F9: 48 8B CF              - mov rcx,rdi
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A388FC: 48 8B D8              - mov rbx,rax
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"godmode"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : GoriCuddlyCarnage-Win64-Shipping.exe
+  Version: 
+  Date   : 2025-07-02
+  Author : ZoDDeL
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(godmode,GoriCuddlyCarnage-Win64-Shipping.exe,F3 0F 11 83 44 1A 00 00) // should be unique
+alloc(newmem,$1000,godmode)
+
+label(code)
+label(return)
+
+newmem:
+  movss xmm0,[rbx+00001A48]
+
+code:
+  movss [rbx+00001A44],xmm0
+  jmp return
+
+godmode:
+  jmp newmem
+  nop 3
+return:
+registersymbol(godmode)
+
+[DISABLE]
+
+godmode:
+  db F3 0F 11 83 44 1A 00 00
+
+unregistersymbol(godmode)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFEF
+
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFBC: 74 08                    - je "GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFC6
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFBE: F3 0F 10 0D 5E 15 F9 02  - movss xmm1,[GoriCuddlyCarnage-Win64-Shipping.D3D12SDKVersion+3B58]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFC6: F3 0F 10 83 44 1A 00 00  - movss xmm0,[rbx+00001A44]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFCE: 48 8D 55 F7              - lea rdx,[rbp-09]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFD2: F2 0F 10 56 10           - movsd xmm2,[rsi+10]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFD7: 48 8B 8B 20 06 00 00     - mov rcx,[rbx+00000620]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFDE: 0F 57 D7                 - xorps xmm2,xmm7
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFE1: F3 41 0F 59 C8           - mulss xmm1,xmm8
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFE6: F2 0F 11 55 97           - movsd [rbp-69],xmm2
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFEB: F3 0F 5C C1              - subss xmm0,xmm1
+// ---------- INJECTING HERE ----------
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFEF: F3 0F 11 83 44 1A 00 00  - movss [rbx+00001A44],xmm0
+// ---------- DONE INJECTING  ----------
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFF7: 0F 10 06                 - movups xmm0,[rsi]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFFA: 0F 57 C7                 - xorps xmm0,xmm7
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A4FFFD: 0F 11 45 87              - movups [rbp-79],xmm0
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A50001: E8 CA 0D D9 01           - call "GoriCuddlyCarnage-Win64-Shipping.exe"+37E0DD0
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A50006: 48 8D 55 C7              - lea rdx,[rbp-39]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A5000A: 48 8B C8                 - mov rcx,rax
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A5000D: E8 9E A5 0F 00           - call "GoriCuddlyCarnage-Win64-Shipping.exe"+1B4A5B0
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A50012: 48 8D 55 A7              - lea rdx,[rbp-59]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A50016: 48 8D 4D 87              - lea rcx,[rbp-79]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A5001A: E8 91 A5 0F 00           - call "GoriCuddlyCarnage-Win64-Shipping.exe"+1B4A5B0
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9</ID>
+      <Description>"money (open inventory)"</Description>
+      <Options moHideChildren="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : GoriCuddlyCarnage-Win64-Shipping.exe
+  Version: 
+  Date   : 2025-07-02
+  Author : ZoDDeL
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(money,GoriCuddlyCarnage-Win64-Shipping.exe,8B 81 D0 00 00 00 48 83 C4) // should be unique
+alloc(newmem,$1000,money)
+
+label(code)
+label(return)
+
+newmem:
+  mov [_money],rcx
+
+code:
+  mov eax,[rcx+000000D0]
+  jmp return
+
+_money:
+dd #0
+
+money:
+  jmp newmem
+  nop
+return:
+registersymbol(money)
+registersymbol(_money)
+
+[DISABLE]
+
+money:
+  db 8B 81 D0 00 00 00
+
+unregistersymbol(money)
+unregistersymbol(_money)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A11
+
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A619EE: CC                    - int 3 
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A619EF: CC                    - int 3 
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A619F0: 40 53                 - push rbx
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A619F2: 48 83 EC 20           - sub rsp,20
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A619F6: 48 8B D9              - mov rbx,rcx
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A619F9: E8 12 5E FD FF        - call "GoriCuddlyCarnage-Win64-Shipping.exe"+1A37810
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A619FE: 48 85 C0              - test rax,rax
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A01: 74 1A                 - je "GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A1D
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A03: 48 8B 83 98 02 00 00  - mov rax,[rbx+00000298]
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A0A: 48 8B 88 A0 02 00 00  - mov rcx,[rax+000002A0]
+// ---------- INJECTING HERE ----------
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A11: 8B 81 D0 00 00 00     - mov eax,[rcx+000000D0]
+// ---------- DONE INJECTING  ----------
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A17: 48 83 C4 20           - add rsp,20
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A1B: 5B                    - pop rbx
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A1C: C3                    - ret 
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A1D: 48 83 C4 20           - add rsp,20
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A21: 5B                    - pop rbx
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A22: C3                    - ret 
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A23: CC                    - int 3 
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A24: CC                    - int 3 
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A25: CC                    - int 3 
+"GoriCuddlyCarnage-Win64-Shipping.exe"+1A61A26: CC                    - int 3 
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>33</ID>
+          <Description>"current money"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>_money</Address>
+          <Offsets>
+            <Offset>D0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <LuaScript>if not syntaxcheck then
+
+  getAutoAttachList().add("GoriCuddlyCarnage-Win64-Shipping.exe")
+
+
+
+  function cycleFullCompact( sender, force )
+    local state = not( compactmenuitem.Caption == 'Compact View Mode' )
+    if force ~= nil then
+      state = not force
+    end
+    compactmenuitem.Caption = state and 'Compact View Mode' or 'Full View Mode'
+    getMainForm().Splitter1.Visible = state
+    getMainForm().Panel4.Visible = state
+    getMainForm().Panel5.Visible = state
+  end
+
+  function addCompactMenu()
+    if compactmenualreadyexists then return end
+      local parent = getMainForm().Menu.Items
+      compactmenuitem = createMenuItem( parent )
+      parent.add( compactmenuitem )
+      compactmenuitem.Caption = 'Compact View Mode'
+      compactmenuitem.OnClick = cycleFullCompact
+      compactmenualreadyexists = 'yes'
+  end
+
+  addCompactMenu()
+  cycleFullCompact( nil, true )
+
+
+  	function pushYoutube( sender, force )
+		local state = not( youtubemenuitem.Caption == 'my Youtube' )
+		if force ~= nil then
+		   state = not force
+		end
+		youtubemenuitem.Caption = state and 'my Youtube' or 'my Youtube'
+		if force == nil then
+		shellExecute('https://www.youtube.com/@ZoDDeL')
+		end
+	end
+
+	function addYoutubeButton()
+		if donomenualreadyexists then return end
+		local parent = getMainForm().Menu.Items
+		youtubemenuitem = createMenuItem( parent )
+		parent.add( youtubemenuitem )
+		youtubemenuitem.Caption = 'my Youtube'
+		youtubemenuitem.OnClick = pushYoutube
+		youtubemenualreadyexists = 'yes'
+	end
+
+	addYoutubeButton()
+	pushYoutube( nil, true )
+
+
+	function pushDono( sender, force )
+		local state = not( donomenuitem.Caption == 'Thx for your Donation :)' )
+		if force ~= nil then
+		   state = not force
+		end
+		donomenuitem.Caption = state and 'Thx for your Donation :)' or 'Paypal Donation'
+		if force == nil then
+		shellExecute('https://paypal.me/zoddel')
+		end
+	end
+
+	function addDonoButton()
+		if donomenualreadyexists then return end
+		local parent = getMainForm().Menu.Items
+		donomenuitem = createMenuItem( parent )
+		parent.add( donomenuitem )
+		donomenuitem.Caption = 'Thx for your Donation :)'
+		donomenuitem.OnClick = pushDono
+		donomenualreadyexists = 'yes'
+	end
+
+	addDonoButton()
+	pushDono( nil, true )
+
+
+	function pushGitHub( sender, force )
+		local state = not( githubmenuitem.Caption == 'GitHub' )
+		if force ~= nil then
+		   state = not force
+		end
+		githubmenuitem.Caption = state and 'GitHub' or 'GitHub'
+		if force == nil then
+		shellExecute('https://github.com/ZoDDeL/CheatEngine-Tables')
+		end
+	end
+
+	function addGitHubButton()
+		if githubmenualreadyexists then return end
+		local parent = getMainForm().Menu.Items
+		githubmenuitem = createMenuItem( parent )
+		parent.add( githubmenuitem )
+		githubmenuitem.Caption = 'GitHub'
+		githubmenuitem.OnClick = pushGitHub
+		githubmenualreadyexists = 'yes'
+	end
+
+	addGitHubButton()
+	pushGitHub( nil, true )
+
+
+end
+
+
+</LuaScript>
+</CheatTable>
