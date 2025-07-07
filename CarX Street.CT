@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="46">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"instant level 149 (open map)"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : CarX Street.exe
+  Version: 
+  Date   : 2025-07-06
+  Author : ZoDDeL
+
+  This script does blah blah blah
+
+0.00 700.00 1500.00 2300.00 3300.00 4300.00 5300.00 6300.00 7300.00 8300.00 9300.00 10300.00 11300.00 12300.00 13300.00 14300.00 15300.00 16300.00 17300.00 18300.00 19300.00 20300.00 21300.00 23300.00 25300.00 27300.00 29300.00 31300.00 33300.00 35300.00 37300.00 39300.00
+
+RAX = current level
+}
+
+[ENABLE]
+
+aobscanmodule(instantMaxLevel,GameAssembly.dll,0F 2F 4C 81 20 73 0C) // should be unique
+alloc(newmem,$1000,instantMaxLevel)
+
+label(code)
+label(return)
+
+newmem:
+  cmp [rcx+rax*4+20],(float)700.00
+  jl code
+  cmp [rcx+rax*4+20],(float)1080000.00  //1081000.00
+  jg code
+  mov [rcx+rax*4+20],(float)0.00
+  jmp code
+
+code:
+  comiss xmm1,[rcx+rax*4+20]
+  jmp return
+
+instantMaxLevel:
+  jmp newmem
+return:
+registersymbol(instantMaxLevel)
+
+[DISABLE]
+
+instantMaxLevel:
+  db 0F 2F 4C 81 20
+
+unregistersymbol(instantMaxLevel)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+14677A8
+
+GameAssembly.dll+1467788: 48 85 D2              - test rdx,rdx
+GameAssembly.dll+146778B: 74 35                 - je GameAssembly.dll+14677C2
+GameAssembly.dll+146778D: 8B 52 18              - mov edx,[rdx+18]
+GameAssembly.dll+1467790: 83 EA 01              - sub edx,01
+GameAssembly.dll+1467793: 78 1F                 - js GameAssembly.dll+14677B4
+GameAssembly.dll+1467795: 48 8B 49 20           - mov rcx,[rcx+20]
+GameAssembly.dll+1467799: 0F 1F 80 00 00 00 00  - nop dword ptr [rax+00000000]
+GameAssembly.dll+14677A0: 3B 51 18              - cmp edx,[rcx+18]
+GameAssembly.dll+14677A3: 73 23                 - jae GameAssembly.dll+14677C8
+GameAssembly.dll+14677A5: 48 63 C2              - movsxd  rax,edx
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+14677A8: 0F 2F 4C 81 20        - comiss xmm1,[rcx+rax*4+20]
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+14677AD: 73 0C                 - jae GameAssembly.dll+14677BB
+GameAssembly.dll+14677AF: 83 EA 01              - sub edx,01
+GameAssembly.dll+14677B2: 79 EC                 - jns GameAssembly.dll+14677A0
+GameAssembly.dll+14677B4: 33 C0                 - xor eax,eax
+GameAssembly.dll+14677B6: 48 83 C4 28           - add rsp,28
+GameAssembly.dll+14677BA: C3                    - ret 
+GameAssembly.dll+14677BB: 8B C2                 - mov eax,edx
+GameAssembly.dll+14677BD: 48 83 C4 28           - add rsp,28
+GameAssembly.dll+14677C1: C3                    - ret 
+GameAssembly.dll+14677C2: E8 D9 66 2C FF        - call GameAssembly.dll+72DEA0
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <LuaScript>if not syntaxcheck then
+
+  getAutoAttachList().add("CarX Street.exe")
+
+
+
+  function cycleFullCompact( sender, force )
+    local state = not( compactmenuitem.Caption == 'Compact View Mode' )
+    if force ~= nil then
+      state = not force
+    end
+    compactmenuitem.Caption = state and 'Compact View Mode' or 'Full View Mode'
+    getMainForm().Splitter1.Visible = state
+    getMainForm().Panel4.Visible = state
+    getMainForm().Panel5.Visible = state
+  end
+
+  function addCompactMenu()
+    if compactmenualreadyexists then return end
+      local parent = getMainForm().Menu.Items
+      compactmenuitem = createMenuItem( parent )
+      parent.add( compactmenuitem )
+      compactmenuitem.Caption = 'Compact View Mode'
+      compactmenuitem.OnClick = cycleFullCompact
+      compactmenualreadyexists = 'yes'
+  end
+
+  addCompactMenu()
+  cycleFullCompact( nil, true )
+
+
+  	function pushYoutube( sender, force )
+		local state = not( youtubemenuitem.Caption == 'my Youtube' )
+		if force ~= nil then
+		   state = not force
+		end
+		youtubemenuitem.Caption = state and 'my Youtube' or 'my Youtube'
+		if force == nil then
+		shellExecute('https://www.youtube.com/@ZoDDeL')
+		end
+	end
+
+	function addYoutubeButton()
+		if donomenualreadyexists then return end
+		local parent = getMainForm().Menu.Items
+		youtubemenuitem = createMenuItem( parent )
+		parent.add( youtubemenuitem )
+		youtubemenuitem.Caption = 'my Youtube'
+		youtubemenuitem.OnClick = pushYoutube
+		youtubemenualreadyexists = 'yes'
+	end
+
+	addYoutubeButton()
+	pushYoutube( nil, true )
+
+
+	function pushDono( sender, force )
+		local state = not( donomenuitem.Caption == 'Thx for your Donation :)' )
+		if force ~= nil then
+		   state = not force
+		end
+		donomenuitem.Caption = state and 'Thx for your Donation :)' or 'Paypal Donation'
+		if force == nil then
+		shellExecute('https://paypal.me/zoddel')
+		end
+	end
+
+	function addDonoButton()
+		if donomenualreadyexists then return end
+		local parent = getMainForm().Menu.Items
+		donomenuitem = createMenuItem( parent )
+		parent.add( donomenuitem )
+		donomenuitem.Caption = 'Thx for your Donation :)'
+		donomenuitem.OnClick = pushDono
+		donomenualreadyexists = 'yes'
+	end
+
+	addDonoButton()
+	pushDono( nil, true )
+
+
+	function pushGitHub( sender, force )
+		local state = not( githubmenuitem.Caption == 'GitHub' )
+		if force ~= nil then
+		   state = not force
+		end
+		githubmenuitem.Caption = state and 'GitHub' or 'GitHub'
+		if force == nil then
+		shellExecute('https://github.com/ZoDDeL/CheatEngine-Tables')
+		end
+	end
+
+	function addGitHubButton()
+		if githubmenualreadyexists then return end
+		local parent = getMainForm().Menu.Items
+		githubmenuitem = createMenuItem( parent )
+		parent.add( githubmenuitem )
+		githubmenuitem.Caption = 'GitHub'
+		githubmenuitem.OnClick = pushGitHub
+		githubmenualreadyexists = 'yes'
+	end
+
+	addGitHubButton()
+	pushGitHub( nil, true )
+
+
+end
+
+
+</LuaScript>
+</CheatTable>
