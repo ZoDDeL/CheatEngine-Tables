@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="46">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"modify values (activate cheat evolution trainer 1.6.1 first)"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : CarX Street.exe
+  Version: 
+  Date   : 2025-07-22
+  Author : ZoDDeL
+
+  This script does blah blah blah
+}
+
+
+
+[ENABLE]
+
+aobscan(modifyValues,41 54 83 3D F7 01 00 00 01 0F 85 1C 00 00 00 41 C7 40 4C 00 00 00 00)
+registersymbol(modifyValues)
+
+
+[DISABLE]
+unregistersymbol(modifyValues)
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1BA61B6000F
+
+1BA61B5FFF9:                             - ?? 
+1BA61B5FFFA:                             - ?? 
+1BA61B5FFFB:                             - ?? 
+1BA61B5FFFC:                             - ?? 
+1BA61B5FFFD:                             - ?? 
+1BA61B5FFFE:                             - ?? 
+1BA61B5FFFF:                             - ?? 
+1BA61B60000: 41 54                       - push r12
+1BA61B60002: 83 3D F7 01 00 00 01        - cmp dword ptr [1BA61B60200],01
+1BA61B60009: 0F 85 1C 00 00 00           - jne 1BA61B6002B
+// ---------- INJECTING HERE ----------
+1BA61B6000F: 41 C7 40 4C 00 00 00 00     - mov [r8+4C],00000000
+// ---------- DONE INJECTING  ----------
+1BA61B60017: 68 7F 96 18 4B              - push 4B18967F
+1BA61B6001C: F3 0F 10 04 24              - movss xmm0,[rsp]
+1BA61B60021: 48 83 C4 08                 - add rsp,08
+1BA61B60025: F3 41 0F 11 40 48           - movss [r8+48],xmm0
+1BA61B6002B: 83 3D D2 01 00 00 01        - cmp dword ptr [1BA61B60204],01
+1BA61B60032: 0F 85 22 00 00 00           - jne 1BA61B6005A
+1BA61B60038: 4C 8B 66 18                 - mov r12,[rsi+18]
+1BA61B6003C: 41 C7 44 24 4C 00 00 00 00  - mov [r12+4C],00000000
+1BA61B60045: 68 80 4F C3 47              - push 47C34F80
+1BA61B6004A: F3 0F 10 04 24              - movss xmm0,[rsp]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"credits (dont go over 2.000.000.000!!!)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>modifyValues+18</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"yellow dollar (dont go over 2.000.000.000!!!)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>modifyValues+46</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"current xp (1081000 = lv150)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>modifyValues+75</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <LuaScript>if not syntaxcheck then
+
+  getAutoAttachList().add("CarX Street.exe")
+
+
+
+  function cycleFullCompact( sender, force )
+    local state = not( compactmenuitem.Caption == 'Compact View Mode' )
+    if force ~= nil then
+      state = not force
+    end
+    compactmenuitem.Caption = state and 'Compact View Mode' or 'Full View Mode'
+    getMainForm().Splitter1.Visible = state
+    getMainForm().Panel4.Visible = state
+    getMainForm().Panel5.Visible = state
+  end
+
+  function addCompactMenu()
+    if compactmenualreadyexists then return end
+      local parent = getMainForm().Menu.Items
+      compactmenuitem = createMenuItem( parent )
+      parent.add( compactmenuitem )
+      compactmenuitem.Caption = 'Compact View Mode'
+      compactmenuitem.OnClick = cycleFullCompact
+      compactmenualreadyexists = 'yes'
+  end
+
+  addCompactMenu()
+  cycleFullCompact( nil, true )
+
+
+  	function pushYoutube( sender, force )
+		local state = not( youtubemenuitem.Caption == 'my Youtube' )
+		if force ~= nil then
+		   state = not force
+		end
+		youtubemenuitem.Caption = state and 'my Youtube' or 'my Youtube'
+		if force == nil then
+		shellExecute('https://www.youtube.com/@ZoDDeL')
+		end
+	end
+
+	function addYoutubeButton()
+		if donomenualreadyexists then return end
+		local parent = getMainForm().Menu.Items
+		youtubemenuitem = createMenuItem( parent )
+		parent.add( youtubemenuitem )
+		youtubemenuitem.Caption = 'my Youtube'
+		youtubemenuitem.OnClick = pushYoutube
+		youtubemenualreadyexists = 'yes'
+	end
+
+	addYoutubeButton()
+	pushYoutube( nil, true )
+
+
+	function pushDono( sender, force )
+		local state = not( donomenuitem.Caption == 'Thx for your Donation :)' )
+		if force ~= nil then
+		   state = not force
+		end
+		donomenuitem.Caption = state and 'Thx for your Donation :)' or 'Paypal Donation'
+		if force == nil then
+		shellExecute('https://paypal.me/zoddel')
+		end
+	end
+
+	function addDonoButton()
+		if donomenualreadyexists then return end
+		local parent = getMainForm().Menu.Items
+		donomenuitem = createMenuItem( parent )
+		parent.add( donomenuitem )
+		donomenuitem.Caption = 'Thx for your Donation :)'
+		donomenuitem.OnClick = pushDono
+		donomenualreadyexists = 'yes'
+	end
+
+	addDonoButton()
+	pushDono( nil, true )
+
+
+	function pushGitHub( sender, force )
+		local state = not( githubmenuitem.Caption == 'GitHub' )
+		if force ~= nil then
+		   state = not force
+		end
+		githubmenuitem.Caption = state and 'GitHub' or 'GitHub'
+		if force == nil then
+		shellExecute('https://github.com/ZoDDeL/CheatEngine-Tables')
+		end
+	end
+
+	function addGitHubButton()
+		if githubmenualreadyexists then return end
+		local parent = getMainForm().Menu.Items
+		githubmenuitem = createMenuItem( parent )
+		parent.add( githubmenuitem )
+		githubmenuitem.Caption = 'GitHub'
+		githubmenuitem.OnClick = pushGitHub
+		githubmenualreadyexists = 'yes'
+	end
+
+	addGitHubButton()
+	pushGitHub( nil, true )
+
+
+end
+
+
+</LuaScript>
+</CheatTable>
